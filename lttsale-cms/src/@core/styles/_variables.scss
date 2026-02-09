@@ -1,0 +1,45 @@
+// Vuexy Color Variables
+$primary: #7367f0;
+$secondary: #808390;
+$success: #28c76f;
+$error: #ff4c51;
+$warning: #ff9f43;
+$info: #00bad1;
+
+// Light Theme Colors
+$light-background: #f8f7fa;
+$light-surface: #ffffff;
+$light-text-primary: #4b465c;
+$light-text-secondary: #6e6b7b;
+
+// Dark Theme Colors
+$dark-background: #25293c;
+$dark-surface: #2f3349;
+$dark-text-primary: #e1def5;
+$dark-text-secondary: #b6b0c6;
+
+// Layout Dimensions
+$sidebar-width: 260px;
+$sidebar-collapsed-width: 70px;
+$navbar-height: 54px;
+$footer-height: 54px;
+$content-padding: 1.5rem;
+
+// Transitions
+$transition-duration: 0.25s;
+$transition-timing: ease-in-out;
+
+// Shadows
+$shadow-sm: 0px 2px 4px rgba(15, 20, 34, 0.08);
+$shadow-md: 0px 4px 8px rgba(15, 20, 34, 0.08);
+$shadow-lg: 0px 6px 12px rgba(15, 20, 34, 0.1);
+
+// Border Radius
+$border-radius-sm: 4px;
+$border-radius-md: 6px;
+$border-radius-lg: 8px;
+
+// Z-Index
+$z-index-sidebar: 1200;
+$z-index-navbar: 1100;
+$z-index-backdrop: 1000;
