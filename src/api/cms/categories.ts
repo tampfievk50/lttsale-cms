@@ -7,16 +7,16 @@ export const categoriesClient = {
     searchParams.set('page', '1')
     searchParams.set('size', String(DEFAULT_PAGE_SIZE))
     if (params?.search) searchParams.set('search', params.search)
-    return request<ListResponse<{ id: string; name: string; createdAt: string; updatedAt: string }>>(`/api/categories?${searchParams.toString()}`)
+    return request<ListResponse<{ id: string; name: string; createdAt: string; updatedAt: string }>>(`/v1/categories?${searchParams.toString()}`)
   },
-  getById: (id: string) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/api/categories/${id}`),
+  getById: (id: string) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/v1/categories/${id}`),
   create: (data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>('/api/categories', {
     method: 'POST',
     body: JSON.stringify(data),
   }),
-  update: (id: string, data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/api/categories/${id}`, {
+  update: (id: string, data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/v1/categories/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
-  delete: (id: string) => request<void>(`/api/categories/${id}`, { method: 'DELETE' }),
+  delete: (id: string) => request<void>(`/v1/categories/${id}`, { method: 'DELETE' }),
 }

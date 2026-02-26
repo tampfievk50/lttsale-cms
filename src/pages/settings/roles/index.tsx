@@ -30,7 +30,7 @@ import {
 } from '@tabler/icons-react'
 import { PageHeader, DataTable, type Column, ConfirmDialog } from '@/components'
 import { useRolesManagementStore } from '@/store'
-import type { Role, Policy, Permission } from '@/types'
+import type { Role, Policy } from '@/types'
 
 const RolesPage = () => {
   const roles = useRolesManagementStore((s) => s.roles)
@@ -133,7 +133,7 @@ const RolesPage = () => {
     }
   }
 
-  const columns: Column<Role & { id: string }>[] = [
+  const columns: Column<Role>[] = [
     {
       id: 'name',
       label: 'Name',
@@ -161,7 +161,7 @@ const RolesPage = () => {
               color="primary"
               onClick={(e) => {
                 e.stopPropagation()
-                handleSelectRole(row as unknown as Role)
+                handleSelectRole(row)
               }}
             >
               <IconShieldCheck size={18} />
@@ -172,7 +172,7 @@ const RolesPage = () => {
               size="small"
               onClick={(e) => {
                 e.stopPropagation()
-                handleOpenForm(row as unknown as Role)
+                handleOpenForm(row)
               }}
             >
               <IconEdit size={18} />
@@ -184,7 +184,7 @@ const RolesPage = () => {
               color="error"
               onClick={(e) => {
                 e.stopPropagation()
-                handleDeleteClick((row as unknown as Role).id)
+                handleDeleteClick(row.id)
               }}
             >
               <IconTrash size={18} />
@@ -200,8 +200,6 @@ const RolesPage = () => {
     const q = searchQuery.toLowerCase()
     return r.name.toLowerCase().includes(q) || (r.description || '').toLowerCase().includes(q)
   })
-  const mappedRoles = filteredRoles.map((r) => ({ ...r, id: String(r.id) }))
-
   return (
     <Box>
       <PageHeader
@@ -222,7 +220,7 @@ const RolesPage = () => {
         <Grid size={{ xs: 12, md: selectedRole ? 6 : 12 }}>
           <DataTable
             columns={columns}
-            data={mappedRoles}
+            data={filteredRoles}
             loading={loading}
             searchPlaceholder="Search roles..."
             onSearch={setSearchQuery}

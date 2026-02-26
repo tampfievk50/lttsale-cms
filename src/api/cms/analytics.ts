@@ -22,6 +22,6 @@ export const analyticsClient = {
       unpaidOrders: number
       paidAmount: number
       unpaidAmount: number
-    }>(`/api/analytics${query ? `?${query}` : ''}`)
+    }>(`/v1/analytics${query ? `?${query}` : ''}`)
   },
 }

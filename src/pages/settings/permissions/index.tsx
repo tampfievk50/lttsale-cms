@@ -83,7 +83,7 @@ const PermissionsPage = () => {
     setPermToDelete(null)
   }
 
-  const columns: Column<Permission & { id: string }>[] = [
+  const columns: Column<Permission>[] = [
     {
       id: 'name',
       label: 'Name',
@@ -134,7 +134,7 @@ const PermissionsPage = () => {
               size="small"
               onClick={(e) => {
                 e.stopPropagation()
-                handleOpenForm(row as unknown as Permission)
+                handleOpenForm(row)
               }}
             >
               <IconEdit size={18} />
@@ -146,7 +146,7 @@ const PermissionsPage = () => {
               color="error"
               onClick={(e) => {
                 e.stopPropagation()
-                handleDeleteClick((row as unknown as Permission).id)
+                handleDeleteClick(row.id)
               }}
             >
               <IconTrash size={18} />
@@ -162,8 +162,6 @@ const PermissionsPage = () => {
     const q = searchQuery.toLowerCase()
     return p.name.toLowerCase().includes(q) || p.path.toLowerCase().includes(q) || (p.description || '').toLowerCase().includes(q)
   })
-  const mappedPermissions = filteredPermissions.map((p) => ({ ...p, id: String(p.id) }))
-
   return (
     <Box>
       <PageHeader
@@ -182,7 +180,7 @@ const PermissionsPage = () => {
 
       <DataTable
         columns={columns}
-        data={mappedPermissions}
+        data={filteredPermissions}
         loading={loading}
         searchPlaceholder="Search permissions..."
         onSearch={setSearchQuery}

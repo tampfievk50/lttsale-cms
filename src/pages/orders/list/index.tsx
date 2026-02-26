@@ -34,7 +34,7 @@ import {
 } from '@tabler/icons-react'
 import { PageHeader, DataTable, type Column, ConfirmDialog, OrderFormModal } from '@/components'
 import { useOrdersStore } from '@/store'
-import type { Order, OrderStatusType, CreateOrderRequest, PaymentStatusType } from '@/types'
+import type { Order, OrderStatusType, CreateOrderRequest } from '@/types'
 import { OrderStatus, OrderStatusInfo, PaymentStatus, PaymentStatusInfo } from '@/types'
 import { formatVND, getDefaultDateRange } from '@/utils'
 
@@ -48,15 +48,13 @@ const OrdersList = () => {
   const cancelOrder = useOrdersStore((state) => state.cancelOrder)
   const markPaid = useOrdersStore((state) => state.markPaid)
   const toggleDelivered = useOrdersStore((state) => state.toggleDelivered)
-  const togglePaid = useOrdersStore((state) => state.togglePaid)
-
   const defaultDates = getDefaultDateRange()
   const [dateFrom, setDateFrom] = useState(defaultDates.dateFrom)
   const [dateTo, setDateTo] = useState(defaultDates.dateTo)
   const [statusFilter, setStatusFilter] = useState<string>('')
   const [paymentFilter, setPaymentFilter] = useState<string>('')
   const [search, setSearch] = useState('')
-  const debounceRef = useRef<NodeJS.Timeout | null>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
     if (debounceRef.current) clearTimeout(debounceRef.current)

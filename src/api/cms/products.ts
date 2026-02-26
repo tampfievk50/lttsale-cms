@@ -26,7 +26,7 @@ export const productsClient = {
       isPublished: boolean
       createdAt: string
       updatedAt: string
-    }>>(`/api/products?${searchParams.toString()}`)
+    }>>(`/v1/products?${searchParams.toString()}`)
   },
   getById: (id: string) => request<{
     id: string
@@ -45,7 +45,7 @@ export const productsClient = {
     isPublished: boolean
     createdAt: string
     updatedAt: string
-  }>(`/api/products/${id}`),
+  }>(`/v1/products/${id}`),
   create: (data: {
     name: string
     description?: string
@@ -84,11 +84,11 @@ export const productsClient = {
     isPublished: boolean
     createdAt: string
     updatedAt: string
-  }>(`/api/products/${id}`, {
+  }>(`/v1/products/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
-  delete: (id: string) => request<void>(`/api/products/${id}`, { method: 'DELETE' }),
+  delete: (id: string) => request<void>(`/v1/products/${id}`, { method: 'DELETE' }),
   togglePublished: (id: string) => request<{
     id: string
     name: string
@@ -99,5 +99,5 @@ export const productsClient = {
     isPublished: boolean
     createdAt: string
     updatedAt: string
-  }>(`/api/products/${id}/toggle-published`, { method: 'PATCH' }),
+  }>(`/v1/products/${id}/toggle-published`, { method: 'PATCH' }),
 }

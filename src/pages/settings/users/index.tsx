@@ -185,7 +185,7 @@ const UsersPage = () => {
     ? true
     : formData.username && formData.email && formData.password
 
-  const columns: Column<SsoUser & { id: string }>[] = [
+  const columns: Column<SsoUser>[] = [
     {
       id: 'username',
       label: 'Username',
@@ -222,7 +222,7 @@ const UsersPage = () => {
       align: 'center',
       minWidth: 150,
       format: (row) => {
-        const user = row as unknown as SsoUser
+        const user = row
         const assignedRoles = userRolesMap[user.id] || []
         return (
           <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, justifyContent: 'center' }}>
@@ -243,7 +243,7 @@ const UsersPage = () => {
       align: 'center',
       minWidth: 150,
       format: (row) => {
-        const user = row as unknown as SsoUser
+        const user = row
         return (
           <Box sx={{ display: 'flex', justifyContent: 'center', gap: 0.5 }}>
             <Tooltip title={user.is_active ? 'Deactivate' : 'Activate'}>
@@ -298,9 +298,6 @@ const UsersPage = () => {
     },
   ]
 
-  // Map SsoUser to have string id for DataTable
-  const mappedUsers = users.map((u) => ({ ...u, id: String(u.id) }))
-
   return (
     <Box>
       <PageHeader
@@ -319,7 +316,7 @@ const UsersPage = () => {
 
       <DataTable
         columns={columns}
-        data={mappedUsers}
+        data={users}
         loading={loading}
         searchPlaceholder="Search users..."
         onSearch={(s) => fetchUsers(s)}

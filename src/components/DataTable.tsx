@@ -35,7 +35,7 @@ interface DataTableProps<T> {
   rowsPerPageOptions?: number[]
 }
 
-export function DataTable<T extends { id: string }>({
+export function DataTable<T extends { id: string | number }>({
   columns,
   data,
   loading = false,
@@ -48,7 +48,7 @@ export function DataTable<T extends { id: string }>({
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(10)
   const [search, setSearch] = useState('')
-  const debounceRef = useRef<NodeJS.Timeout | null>(null)
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const onSearchRef = useRef(onSearch)
   onSearchRef.current = onSearch
@@ -147,7 +147,7 @@ export function DataTable<T extends { id: string }>({
               paginatedData.map((row) => (
                 <TableRow
                   hover
-                  key={row.id}
+                  key={String(row.id)}
                   onClick={() => onRowClick?.(row)}
                   sx={{ cursor: onRowClick ? 'pointer' : 'default' }}
                 >

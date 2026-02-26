@@ -18,7 +18,7 @@ export const customersClient = {
       image: string
       createdAt: string
       updatedAt: string
-    }>>(`/api/customers?${searchParams.toString()}`)
+    }>>(`/v1/customers?${searchParams.toString()}`)
   },
   getById: (id: string) => request<{
     id: string
@@ -30,7 +30,7 @@ export const customersClient = {
     image: string
     createdAt: string
     updatedAt: string
-  }>(`/api/customers/${id}`),
+  }>(`/v1/customers/${id}`),
   getByBuilding: (buildingId: string) => request<ListResponse<{
     id: string
     name: string
@@ -40,7 +40,7 @@ export const customersClient = {
     image: string
     createdAt: string
     updatedAt: string
-  }>>(`/api/customers/building/${buildingId}`),
+  }>>(`/v1/customers/building/${buildingId}`),
   create: (data: {
     name: string
     address: string
@@ -75,9 +75,9 @@ export const customersClient = {
     image: string
     createdAt: string
     updatedAt: string
-  }>(`/api/customers/${id}`, {
+  }>(`/v1/customers/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
-  delete: (id: string) => request<void>(`/api/customers/${id}`, { method: 'DELETE' }),
+  delete: (id: string) => request<void>(`/v1/customers/${id}`, { method: 'DELETE' }),
 }

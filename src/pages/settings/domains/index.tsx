@@ -77,7 +77,7 @@ const DomainsPage = () => {
     setToDelete(null)
   }
 
-  const columns: Column<Resource & { id: string }>[] = [
+  const columns: Column<Resource>[] = [
     {
       id: 'id',
       label: 'ID',
@@ -112,7 +112,7 @@ const DomainsPage = () => {
               size="small"
               onClick={(e) => {
                 e.stopPropagation()
-                handleOpenForm(row as unknown as Resource)
+                handleOpenForm(row)
               }}
             >
               <IconEdit size={18} />
@@ -124,7 +124,7 @@ const DomainsPage = () => {
               color="error"
               onClick={(e) => {
                 e.stopPropagation()
-                handleDeleteClick((row as unknown as Resource).id)
+                handleDeleteClick(row.id)
               }}
             >
               <IconTrash size={18} />
@@ -140,8 +140,6 @@ const DomainsPage = () => {
     const q = searchQuery.toLowerCase()
     return d.name.toLowerCase().includes(q) || (d.description || '').toLowerCase().includes(q)
   })
-  const mapped = filtered.map((d) => ({ ...d, id: String(d.id) }))
-
   return (
     <Box>
       <PageHeader
@@ -160,7 +158,7 @@ const DomainsPage = () => {
 
       <DataTable
         columns={columns}
-        data={mapped}
+        data={filtered}
         loading={loading}
         searchPlaceholder="Search domains..."
         onSearch={setSearchQuery}

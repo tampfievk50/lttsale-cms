@@ -79,10 +79,10 @@ export const ordersClient = {
     if (params?.customerId) searchParams.set('customerId', params.customerId)
     if (params?.search) searchParams.set('search', params.search)
     const query = searchParams.toString()
-    return request<ListResponse<OrderResponse>>(`/api/orders${query ? `?${query}` : ''}`)
+    return request<ListResponse<OrderResponse>>(`/v1/orders${query ? `?${query}` : ''}`)
   },
 
-  getById: (id: string) => request<OrderResponse>(`/api/orders/${id}`),
+  getById: (id: string) => request<OrderResponse>(`/v1/orders/${id}`),
 
   // Create order with multiple items (new format)
   create: (data: {
@@ -128,28 +128,28 @@ export const ordersClient = {
     note?: string
     deliveryImage?: string
     totalPrice?: number
-  }) => request<OrderResponse>(`/api/orders/${id}`, {
+  }) => request<OrderResponse>(`/v1/orders/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
 
-  delete: (id: string) => request<void>(`/api/orders/${id}`, { method: 'DELETE' }),
+  delete: (id: string) => request<void>(`/v1/orders/${id}`, { method: 'DELETE' }),
 
   // Status workflow
   updateStatus: (id: string, data: { status: OrderStatusType; note?: string }) =>
-    request<OrderResponse>(`/api/orders/${id}/status`, {
+    request<OrderResponse>(`/v1/orders/${id}/status`, {
       method: 'PATCH',
       body: JSON.stringify(data),
     }),
 
   cancel: (id: string, reason: string) =>
-    request<OrderResponse>(`/api/orders/${id}/cancel`, {
+    request<OrderResponse>(`/v1/orders/${id}/cancel`, {
       method: 'POST',
       body: JSON.stringify({ reason }),
     }),
 
   markPaid: (id: string, data?: { paidAt?: string; note?: string }) =>
-    request<OrderResponse>(`/api/orders/${id}/paid`, {
+    request<OrderResponse>(`/v1/orders/${id}/paid`, {
       method: 'POST',
       body: JSON.stringify(data || {}),
     }),
@@ -160,21 +160,21 @@ export const ordersClient = {
     quantity: number
     unitPrice?: number
     note?: string
-  }) => request<OrderResponse>(`/api/orders/${orderId}/items`, {
+  }) => request<OrderResponse>(`/v1/orders/${orderId}/items`, {
     method: 'POST',
     body: JSON.stringify(data),
   }),
 
   removeItem: (orderId: string, itemId: string) =>
-    request<OrderResponse>(`/api/orders/${orderId}/items/${itemId}`, {
+    request<OrderResponse>(`/v1/orders/${orderId}/items/${itemId}`, {
       method: 'DELETE',
     }),
 
   // Status history
   getHistory: (id: string) =>
-    request<OrderStatusHistoryResponse[]>(`/api/orders/${id}/history`),
+    request<OrderStatusHistoryResponse[]>(`/v1/orders/${id}/history`),
 
   // Legacy toggle methods (backward compatibility)
-  toggleDelivered: (id: string) => request<OrderResponse>(`/api/orders/${id}/toggle-delivered`, { method: 'PATCH' }),
-  togglePaid: (id: string) => request<OrderResponse>(`/api/orders/${id}/toggle-paid`, { method: 'PATCH' }),
+  toggleDelivered: (id: string) => request<OrderResponse>(`/v1/orders/${id}/toggle-delivered`, { method: 'PATCH' }),
+  togglePaid: (id: string) => request<OrderResponse>(`/v1/orders/${id}/toggle-paid`, { method: 'PATCH' }),
 }

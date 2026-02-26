@@ -20,7 +20,7 @@ import {
 import { IconSearch } from '@tabler/icons-react'
 import { PageHeader } from '@/components'
 import { useRolesManagementStore } from '@/store'
-import type { Role, Permission, Policy } from '@/types'
+import type { Permission, Policy } from '@/types'
 import { ssoApi } from '@/api'
 
 interface Resource {

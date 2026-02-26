@@ -7,16 +7,16 @@ export const apartmentsClient = {
     searchParams.set('page', '1')
     searchParams.set('size', String(DEFAULT_PAGE_SIZE))
     if (params?.search) searchParams.set('search', params.search)
-    return request<ListResponse<{ id: string; name: string; createdAt: string; updatedAt: string }>>(`/api/apartments?${searchParams.toString()}`)
+    return request<ListResponse<{ id: string; name: string; createdAt: string; updatedAt: string }>>(`/v1/apartments?${searchParams.toString()}`)
   },
-  getById: (id: string) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/api/apartments/${id}`),
+  getById: (id: string) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/v1/apartments/${id}`),
   create: (data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>('/api/apartments', {
     method: 'POST',
     body: JSON.stringify(data),
   }),
-  update: (id: string, data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/api/apartments/${id}`, {
+  update: (id: string, data: { name: string }) => request<{ id: string; name: string; createdAt: string; updatedAt: string }>(`/v1/apartments/${id}`, {
     method: 'PUT',
     body: JSON.stringify(data),
   }),
-  delete: (id: string) => request<void>(`/api/apartments/${id}`, { method: 'DELETE' }),
+  delete: (id: string) => request<void>(`/v1/apartments/${id}`, { method: 'DELETE' }),
 }
